@@ -1,0 +1,13 @@
+steps:
+- name: node
+  id: build tests
+  entrypoint: npm
+  args:
+  - 'install'
+
+- name: node
+  id: run production environment tests
+  entrypoint: npm
+  args:
+  - 'run'
+  - 'test-prod'
