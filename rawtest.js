@@ -1,6 +1,6 @@
 request = require ('request');
 
-request('http://dev-constellation.citwdd.net/', (err,response, body)=>{
+request('https://easyrent-api-prod.cit362.com/', (err,response, body)=>{
     console.log('Error: '+err);
     console.log('Body: '+body);
 });
