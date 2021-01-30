@@ -1,12 +1,12 @@
 const rp = require('request-promise-native');
 const config = require('config');
 
-const homeUrl = config.get('constellation-url');
+const reservationUrl = config.get('constellation-url')+'/reservations/87c59106-78fd-4ea9-8a8a-fa46e81f149f';
 
-it(`Testing to see if ${homeUrl} is up`, async () =>{
+it(`Testing to see if ${reservationUrl} is up`, async () =>{
     
     var options = {
-        uri: homeUrl,
+        uri: reservationUrl,
         headers:{
         },
     };
@@ -16,6 +16,7 @@ it(`Testing to see if ${homeUrl} is up`, async () =>{
 
     try{
         var response = await rp(options);
+        console.log(JSON.stringify(response));
     } catch (exception){
         errorCaught=exception;
         errorWasCaught=true;
