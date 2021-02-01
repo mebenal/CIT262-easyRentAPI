@@ -35,15 +35,36 @@ it(`Testing to see if ${createUrl} is up`, async () => {
         simple: false,
     };
 
-    var errorWasCaught=false;
-    var errorCaught=null;
+    var errorWasCaught1=false;
+    var errorCaught1=null;
+    var errorWasCaught2=false;
+    var errorCaught2=null;
 
     try{
-        var response = await rp(options);
-        console.log(response)
+        var response1 = await rp(options);
     } catch (exception){
-        errorCaught=exception;
-        errorWasCaught=true;
+        errorCaught1=exception;
+        errorWasCaught1=true;
     }
-    expect(errorWasCaught).toBe(false);//assertion of what is expected
+
+    console.log(response1)
+    debugger;
+    options = {
+        uri: createUrl + '/' + response1.substring(9),
+        headers:{
+        },
+    };
+    debugger;
+
+    try{
+        var response2 = await rp(options);
+    } catch (exception){
+        errorCaught2=exception;
+        errorWasCaught2=true;
+    }
+
+    console.log(response2);
+
+    expect(errorWasCaught1).toBe(false);//assertion of what is expected
+    expect(errorWasCaught2).toBe(false);
 })
