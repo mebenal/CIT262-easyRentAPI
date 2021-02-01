@@ -16,7 +16,7 @@ it('Testing to see if ${reservationsUrl} is up', async () =>{
 
     try{
         var response = await rp(options);
-        console.log(response)
+        //console.log(response)
     } catch (exception){
         errorCaught=exception;
         errorWasCaught=true;
