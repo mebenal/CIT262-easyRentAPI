@@ -1,7 +1,7 @@
 const rp = require('request-promise-native');
 const config = require('config');
 
-const reservationUrl = config.get('reservations-url')+'/reservations/87c59106-78fd-4ea9-8a8a-fa46e81f149f';
+const reservationUrl = config.get('reservations-url')+'/reservations/906b8576-98d4-4aa8-8963-55ef5f372ba6';
 
 it(`Testing to see if ${reservationUrl} is up`, async () =>{
     
