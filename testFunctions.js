@@ -1,19 +1,19 @@
-export {getAllReservation, makeReservation, getSingleReservation};
+//export {getAllReservation, makeReservation, getSingleReservation};
 
 
-export function getAllReservation(rp, resevationsUrl) {
+module.exports.getAllReservation = async function getAllReservation(rp, resevationsUrl) {
     var options = {
-        uri: `${reservationsUrl}/reservations`,
+        uri: `${resevationsUrl}/reservations`,
         // Reservation
         headers:{
-        },
+                },
     };
-
+    
     let funcResp = {
         errorWasCaught:false,
         errorCaught:null
     }
-
+        
     try{
         var response = await rp(options);
         //console.log(response)
@@ -21,11 +21,11 @@ export function getAllReservation(rp, resevationsUrl) {
         funcResp.errorCaught=exception;
         funcResp.errorWasCaught=true;
     }
-
+        
     return funcResp
 }
 
-export function makeReservation(rp, reservationsUrl){
+module.exports.makeReservation = async function makeReservation(rp, reservationsUrl){
     let options = {
         method: 'POST',
         uri: `${reservationsUrl}/reservations`,
@@ -70,11 +70,11 @@ export function makeReservation(rp, reservationsUrl){
         errorCaught=exception;
         errorWasCaught=true;
     }
+    
     return funcResp;
 }
 
-
-export function getSingleReservation(rp, reservationsUrl, create){
+module.exports.getSingleReservation = async function getSingleReservation(rp, reservationsUrl, create){
     var options = {
         uri: `${reservationsUrl}/reservations/${create}`,
         headers:{
@@ -82,10 +82,10 @@ export function getSingleReservation(rp, reservationsUrl, create){
     };
 
     let funcResp = {
-        errorWasCaught=false,
-        errorCaught=null
+        errorWasCaught:false,
+        errorCaught:null
     }
-    
+
     try{
         var response = await rp(options);
         //console.log(JSON.stringify(response));
@@ -93,5 +93,6 @@ export function getSingleReservation(rp, reservationsUrl, create){
         funcResp.errorCaught=exception;
         funcResp.errorWasCaught=true;
     }
+
     return funcResp;
 }
