@@ -1,11 +1,7 @@
-//export {getAllReservation, makeReservation, getSingleReservation};
-
-
 module.exports.getAllReservation = async function getAllReservation(rp, resevationsUrl) {
     var options = {
         uri: `${resevationsUrl}/reservations`,
-        // Reservation
-        headers:{
+         headers:{
                 },
     };
     
@@ -16,8 +12,7 @@ module.exports.getAllReservation = async function getAllReservation(rp, resevati
         
     try{
         var response = await rp(options);
-        //console.log(response)
-    } catch (exception){
+     } catch (exception){
         funcResp.errorCaught=exception;
         funcResp.errorWasCaught=true;
     }
@@ -65,8 +60,7 @@ module.exports.makeReservation = async function makeReservation(rp, reservations
 
     try{
         funcResp.response = await rp(options);
-        //console.log(response)
-    } catch (exception){
+     } catch (exception){
         errorCaught=exception;
         errorWasCaught=true;
     }
@@ -88,8 +82,7 @@ module.exports.getSingleReservation = async function getSingleReservation(rp, re
 
     try{
         var response = await rp(options);
-        //console.log(JSON.stringify(response));
-    } catch (exception){
+     } catch (exception){
         funcResp.errorCaught=exception;
         funcResp.errorWasCaught=true;
     }
