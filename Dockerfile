@@ -1,8 +1,6 @@
 FROM node
 
-WORKDIR /home/"userName"/CIT262-easyRentAPI
-
-COPY . /home/"userName"/CIT262-easyRentAPI
+WORKDIR /app
 
 RUN npm install
 
