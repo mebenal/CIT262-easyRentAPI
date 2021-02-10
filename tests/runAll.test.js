@@ -4,16 +4,43 @@ const f = require('../testFunctions');
 
 const reservationsUrl = config.get('reservations-url');
 it(`Testing to see if ${reservationsUrl} is up`, async () => {
-  const response1 = await f.getAllReservation(rp, reservationsUrl);
+  let respArray = [];
+  const email = `${Date.now()}@test.com`;
 
-  expect(response1.errorWasCaught).toBe(false); // assertion of what is expected
+  // Checks if the page to get all reservations is working.
+  const respGetAllRes = await f.getAll(rp, `${reservationsUrl}/reservations`);
+  respArray[respArray.length] = {name: 'Get all reservations', working: !respGetAllRes.errorWasCaught};
+  
+  // Checks if the page to get all customers is working.
+  const respGetAllCust = await f.getAll(rp, `${reservationsUrl}/customer`);
+  respArray[respArray.length] = {name: 'Get all customers', working: !respGetAllCust.errorWasCaught};
 
-  let response2 = await f.makeReservation(rp, reservationsUrl);
+  // Checks if can create a user.
+  const respCreateCust = await f.createCustomer(rp, `${reservationsUrl}/customer`, email);
+  respArray[respArray.length] = {name: 'Create customer', working: !respCreateCust.errorWasCaught};
 
-  expect(response2.errorWasCaught).toBe(false); // assertion of what is expected
+  // Checks if can create a reservation.
+  const respCreateRes = await f.createReservation(rp, `${reservationsUrl}/reservations`, email);
+  respArray[respArray.length] = {name: 'Create reservation', working: !respCreateRes.errorWasCaught};
 
-  const response3 = await f.getSingleReservation(rp,
-    reservationsUrl, response2.response.substring(9));
+  // Checks if can get a customer.
+  const respGetSingCust = await f.getSingle(rp, `${reservationsUrl}/customer`, email);
+  respArray[respArray.length] = {name: 'Get one customer', working: !respGetSingCust.errorWasCaught};
+  
+  // Checks if can get a reservation.
+  const respGetSingRes = await f.getSingle(rp, `${reservationsUrl}/reservations`, respCreateRes.response);
+  respArray[respArray.length] = {name: 'Get one reservation', working: !respGetSingRes.errorWasCaught};
 
-  expect(response3.errorWasCaught).toBe(false); // assertion of what is expected
+  let str = '';
+  for (let i of respArray) {
+    str += `${i.name} is currently ${i.working ? '' : 'NOT'} working.\n`;
+  }
+  console.log(str);
+
+  expect(respGetAllRes.errorWasCaught).toBe(false); // assertion of what is expected
+  expect(respGetAllCust.errorWasCaught).toBe(false); // assertion of what is expected
+  expect(respCreateCust.errorWasCaught).toBe(false); // assertion of what is expected
+  expect(respCreateRes.errorWasCaught).toBe(false); // assertion of what is expected
+  expect(respGetSingCust.errorWasCaught).toBe(false); // assertion of what is expected
+  expect(respGetSingRes.errorWasCaught).toBe(false); // assertion of what is expected
 });

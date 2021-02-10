@@ -1,6 +1,6 @@
-module.exports.getAllReservation = async function getAllReservation(rp, resevationsUrl) {
+module.exports.getAll = async function getAll(rp, easyRentUrl) {
   const options = {
-    uri: `${resevationsUrl}/reservations`,
+    uri: `${easyRentUrl}`,
     headers: {
     },
   };
@@ -20,14 +20,67 @@ module.exports.getAllReservation = async function getAllReservation(rp, resevati
   return funcResp;
 };
 
-module.exports.makeReservation = async function makeReservation(rp, reservationsUrl) {
+module.exports.getSingle = async function getSingle(rp, easyRentUrl, id) {
+  const options = {
+    uri: `${easyRentUrl}/${id}`,
+    headers: {
+    },
+  };
+
+  const funcResp = {
+    errorWasCaught: false,
+    errorCaught: null,
+  };
+
+  try {
+    const response = await rp(options);
+  } catch (exception) {
+    funcResp.errorCaught = exception;
+    funcResp.errorWasCaught = true;
+  }
+
+  return funcResp;
+};
+
+module.exports.createCustomer = async function createCustomer(rp, customerUrl, id) {
   const options = {
     method: 'POST',
-    uri: `${reservationsUrl}/reservations`,
+    uri: customerUrl,
     headers: {
     },
     body: {
-      customerId: 64209000,
+      'customerName': 'Sam Test',
+      'email': id,
+      'phone': '123-456-7890',
+      'birthDay': '1998-09-01',
+    },
+    json: true,
+    simple: false,
+  }
+
+  const funcResp = {
+    errorWasCaught: false,
+    errorCaught: null,
+    }
+
+  try {
+    const response = await rp(options);
+  } catch (exception) {
+    funcResp.errorCaught = exception;
+    funcResp.errorWasCaught = true;
+  }
+
+  return funcResp;
+}
+
+module.exports.createReservation = async function createReservation(rp, reservationsUrl, id) {
+  const options = {
+    method: 'POST',
+    uri: reservationsUrl,
+    headers: {
+    },
+    body: {
+      customerId: `${id}`,
       reservationItems: [
         {
           description: 'Canoe',
@@ -60,29 +113,7 @@ module.exports.makeReservation = async function makeReservation(rp, reservations
 
   try {
     funcResp.response = await rp(options);
-  } catch (exception) {
-    funcResp.errorCaught = exception;
-    funcResp.errorWasCaught = true;
-  }
-
-  return funcResp;
-};
-
-module.exports.getSingleReservation = async function
-getSingleReservation(rp, reservationsUrl, create) {
-  const options = {
-    uri: `${reservationsUrl}/reservations/${create}`,
-    headers: {
-    },
-  };
-
-  const funcResp = {
-    errorWasCaught: false,
-    errorCaught: null,
-  };
-
-  try {
-    const response = await rp(options);
+    funcResp.response = funcResp.response.substr(9);
   } catch (exception) {
     funcResp.errorCaught = exception;
     funcResp.errorWasCaught = true;
