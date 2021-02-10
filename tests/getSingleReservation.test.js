@@ -3,8 +3,6 @@ const config = require('config');
 
 const reservationUrl = config.get('reservations-url')+'/reservations';
 
-// const reservationId = makeAReservation()
-
 async function makeAReservation() {
     const date = new Date();
     let options = {
