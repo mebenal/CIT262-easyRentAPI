@@ -40,7 +40,7 @@ async function makeAReservation() {
     return response
 }
 
-async function getSingleReservation(reservationId) {
+async function getSingleReservation() {
     const options = {
         url: reservationUrl + "/" + reservationId,
     };
@@ -49,8 +49,10 @@ async function getSingleReservation(reservationId) {
 it(`Testing to see if ${reservationUrl} is up`, async () =>{
     const reservationId = await makeAReservation()
 
+    const trimmedId = reservationId.split(' ')[1]
+
     var options = {
-        uri: reservationUrl + "/" + reservationId,
+        uri: reservationUrl + "/" + trimmedId,
         headers:{
         },
     };
