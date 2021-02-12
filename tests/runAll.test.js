@@ -33,7 +33,7 @@ it(`Testing to see if ${reservationsUrl} is up`, async () => {
 
   let str = '';
   for (let i of respArray) {
-    str += `${i.name} is currently ${i.working ? '' : 'NOT'} working.\n`;
+    str += `${i.name} is currently ${i.working ? '' : 'NOT '}working.\n`;
   }
   console.log(str);
 
