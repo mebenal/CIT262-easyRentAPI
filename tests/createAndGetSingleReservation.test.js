@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 const rp = require('request-promise-native');
 const config = require('config');
 
@@ -55,7 +57,7 @@ async function createReservation() {
   return funcResp;
 }
 
-it(`Testing to see if ${reservationUrl} is up`, async () =>{
+it(`Testing to see if ${reservationUrl} is up`, async () => {
   // Calls create response, which return an object with errors and the reservation id.
   const createResponse = await createReservation();
 

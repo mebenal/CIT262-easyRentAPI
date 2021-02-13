@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const rp = require('request-promise-native');
 const config = require('config');
 
