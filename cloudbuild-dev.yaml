@@ -14,8 +14,7 @@ steps:
   entrypoint: npm
   args:
   - 'run'
-  # - 'test-dev'
-  - 'test-test'
+  - 'test-dev'
 
 # This step builds the container image.
 - name: 'gcr.io/cloud-builders/docker'
