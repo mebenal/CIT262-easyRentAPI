@@ -11,3 +11,14 @@ steps:
   args:
   - 'run'
   - 'test-test'
+
+  # This step runs the integration tests in the Test environment
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Trigger Test Environment Integration Tests
+  args:
+  - 'beta'
+  - 'builds'
+  - 'triggers'
+  - 'run'
+  - 'aa97d5be-a940-4378-b982-676a2e12fe0f'
+  - '--branch=main'
