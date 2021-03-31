@@ -9,7 +9,8 @@ steps:
   - 'install'
 
 - name: node
-  id: run development environment tests
+  # id: run development environment tests
+  id: run test environment tests
   entrypoint: npm
   args:
   - 'run'
@@ -32,3 +33,14 @@ steps:
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/easyrent-apitests-team1:latest'
+
+# This step runs the integration tests in the Test environment
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Trigger Test Environment Integration Tests
+  args:
+  - 'beta'
+  - 'builds'
+  - 'triggers'
+  - 'run'
+  - 'aa97d5be-a940-4378-b982-676a2e12fe0f'
+  - '--branch=main'
